@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Components/MovementComponent.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Enemies/EnemyController.cs" type="Script" id=2]
+[ext_resource path="res://Components/HealthComponent.tscn" type="PackedScene" id=3]
+
+[node name="Enemy" type="KinematicBody2D"]
+script = ExtResource( 2 )
+maxMoveSpeed = 50.0
+testMoveSpeed = 25
+maxForce = 2.0
+seperationDistance = 50
+
+[node name="HealthComponent" parent="." instance=ExtResource( 3 )]
+scale = Vector2( 2, 2 )
+
+[node name="MovementComponent" parent="." instance=ExtResource( 1 )]
+scale = Vector2( 2, 2 )
