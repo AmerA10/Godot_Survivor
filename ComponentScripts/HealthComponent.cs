@@ -14,7 +14,11 @@ public class HealthComponent : Node2D
     public OnDeathEvenetHandler OnDeathEvenet;
 
     [Signal]
-    public delegate void OnHealthUpdated(int newHealth);
+    public delegate void OnHealthUpdatedEventHandler(int newHealth);
+    
+    public delegate void HealthDelegate(int newHealth);
+    public HealthDelegate OnHealthUpdated;
+
 
     // Called when the node enters the scene tree for the first time.
     public override void _Ready()
@@ -30,14 +34,20 @@ public class HealthComponent : Node2D
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-        EmitSignal(nameof(OnHealthUpdated), currentHealth);
-        if(currentHealth <= 0) 
+        EmitSignal(nameof(OnHealthUpdatedEventHandler), currentHealth);
+        OnHealthUpdated?.Invoke(currentHealth);
+        if (currentHealth <= 0) 
         {
             //Fire a IsDead delegate
             EmitSignal(nameof(OnDeathEvenetHandler));
             OnDeathEvenet.Invoke();
         
         }
+    }
+
+    public int GetMaxHealth()
+    {
+        return maxHealth; 
     }
 
 

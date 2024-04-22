@@ -13,11 +13,11 @@ rect_rotation = 0.306355
 rect_pivot_offset = Vector2( 24, 21 )
 
 [node name="HealthDotShadow" type="TextureRect" parent="."]
-margin_left = 2.9094
-margin_top = 4.11253
-margin_right = 27.9094
-margin_bottom = 34.1125
-rect_min_size = Vector2( 25, 30 )
+margin_left = 0.904085
+margin_top = 3.12323
+margin_right = 30.9041
+margin_bottom = 33.1232
+rect_min_size = Vector2( 30, 25 )
 rect_rotation = 8.0
 rect_pivot_offset = Vector2( 12, 15 )
 texture = ExtResource( 2 )

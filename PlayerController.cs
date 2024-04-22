@@ -14,6 +14,9 @@ public class PlayerController : KinematicBody2D
     private EnemySpawner spawner;
     private AudioStreamPlayer2D audioPlayer;
 
+    public delegate void PlayerReady();
+    public PlayerReady OnPlayerReady;
+
     private Timer HitTimer;
 
     //TODO: Figure out how to set up the weapon
@@ -57,6 +60,7 @@ public class PlayerController : KinematicBody2D
         experience.OnLevelUpEvent += combatStats.OnLevelUp;
 
         GD.Print("Player Controller Ready");
+        OnPlayerReady.Invoke();
     }
 
     public HealthComponent GetHealthComponent ()
@@ -152,11 +156,12 @@ public class PlayerController : KinematicBody2D
                 canPushBack = false;
             }
             //Try to move the player or enemy away
-            GD.Print("Player Collided with: " + body.Name + " : " + body.GetClass());
 
             coll.Disabled = true;
 
             HitTimer.Start();
+
+            health.TakeDamage(1);
         }
     }
     public void OnHitTimerTimeOut()
