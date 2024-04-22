@@ -1,7 +1,61 @@
-[gd_scene format=2]
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Components/HealthNode.tscn" type="PackedScene" id=1]
+[ext_resource path="res://HealthUI.cs" type="Script" id=2]
+[ext_resource path="res://Assets/UI/kenney_ui-pack-space-expansion/PNG/barHorizontal_shadow_mid.png" type="Texture" id=3]
+[ext_resource path="res://Assets/UI/kenney_ui-pack-space-expansion/PNG/barHorizontal_blue_mid.png" type="Texture" id=4]
+[ext_resource path="res://SecondaryWeaponUI.cs" type="Script" id=5]
 
 [node name="GameUI" type="CanvasLayer"]
 
 [node name="BaseControl" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 7.0
+margin_top = 4.0
+margin_right = 7.0
+margin_bottom = 4.0
+
+[node name="HealhGrid" type="GridContainer" parent="BaseControl"]
+margin_top = 5.0
+margin_right = 143.0
+margin_bottom = 50.0
+rect_scale = Vector2( 0.970333, 0.984892 )
+columns = 3
+script = ExtResource( 2 )
+
+[node name="HealthNode" parent="BaseControl/HealhGrid" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_right = 45.0
+margin_bottom = 45.0
+rect_rotation = 0.0
+
+[node name="HealthNode2" parent="BaseControl/HealhGrid" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 49.0
+margin_right = 94.0
+margin_bottom = 45.0
+rect_rotation = 0.0
+
+[node name="HealthNode3" parent="BaseControl/HealhGrid" instance=ExtResource( 1 )]
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 98.0
+margin_right = 143.0
+margin_bottom = 45.0
+rect_rotation = 0.0
+
+[node name="SecondaryWeaponUI" type="TextureProgress" parent="BaseControl"]
+margin_left = 1.0
+margin_top = 50.0
+margin_right = 101.0
+margin_bottom = 150.0
+rect_scale = Vector2( 2.12606, 0.173105 )
+value = 20.0
+texture_under = ExtResource( 3 )
+texture_progress = ExtResource( 4 )
+tint_over = Color( 1, 1, 1, 0 )
+nine_patch_stretch = true
+script = ExtResource( 5 )
