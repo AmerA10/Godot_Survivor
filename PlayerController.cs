@@ -68,6 +68,11 @@ public class PlayerController : KinematicBody2D
         return health;
     }
 
+    public Weapon GetWeapon()
+    {
+        return weapon; 
+    }
+
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {

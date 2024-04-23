@@ -70,6 +70,7 @@ anims/Walk = SubResource( 2 )
 wait_time = 2.0
 
 [node name="Weapon" parent="." instance=ExtResource( 7 )]
+secondaryFireMeterMax = 5
 
 [node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
 

@@ -31,7 +31,11 @@ public class GameUI : CanvasLayer
 
         healthUI.SetupHealthUI(playerController.GetHealthComponent().GetMaxHealth());
         playerController.GetHealthComponent().OnHealthUpdated += healthUI.UpdateHealth;
-        GD.Print(playerController.GetHealthComponent().OnHealthUpdated.GetInvocationList().ToString());
+
+        secondaryWeaponUI.SetUpProgress(playerController.GetWeapon().GetSecondaryWeaponMaxAmount());
+        playerController.GetWeapon().OnSecondaryAmountUpdate += secondaryWeaponUI.UpdateAmount;
+
+    
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.

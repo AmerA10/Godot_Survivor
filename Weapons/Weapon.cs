@@ -24,7 +24,10 @@ public class Weapon : Node
     [Export] PackedScene secondaryWeaponPath;
 
     List<HomingProjectile> missiles = new List<HomingProjectile>();
-    
+
+    public delegate void OnSecondaryWeaponAmountChangeEvent(int newAmount);
+    public OnSecondaryWeaponAmountChangeEvent OnSecondaryAmountUpdate;
+
     public override void _Ready()
     {
 
@@ -70,17 +73,22 @@ public class Weapon : Node
         }
 
         secondaryFireMeter = 0;
+        OnSecondaryAmountUpdate?.Invoke(secondaryFireMeter);
     }
 
     public void OnProjectileHit()
     {
         AddSecondaryMeter(1);
     }
+    public int GetSecondaryWeaponMaxAmount()
+    {
+        return secondaryFireMeterMax;
+    }
 
     public void AddSecondaryMeter(int amt)
     {
         secondaryFireMeter = Mathf.Min(secondaryFireMeter + amt, secondaryFireMeterMax);
-        
+        OnSecondaryAmountUpdate?.Invoke(secondaryFireMeter);
     }
 
 }
