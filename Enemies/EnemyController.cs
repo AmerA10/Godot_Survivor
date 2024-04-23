@@ -36,19 +36,15 @@ public class EnemyController : KinematicBody2D
     {
         healthComp = GetNode<HealthComponent>("HealthComponent");
         moveComp = GetNode<MovementComponent>("MovementComponent");
-        //Test for now
         healthComp.OnDeathEvenet += OnDeathHandle;
-        //Change this, each enemy type should have its own stats
 
     }
 
-    //Think about making pointer a ref or a pointer
     public void SetUpEnemy(EnemySpawner spawner ,Node2D target)
     {
       
         healthComp = GetNode<HealthComponent>("HealthComponent");
         moveComp = GetNode<MovementComponent>("MovementComponent");
-        //Test for now
         healthComp.OnDeathEvenet += OnDeathHandle;
 
         moveComp.SetTarget(target);
@@ -67,8 +63,6 @@ public class EnemyController : KinematicBody2D
         QueueFree();
 
     }
-
-    //  // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _PhysicsProcess(float delta)
     {
         target = moveComp.GetTarget();
@@ -123,7 +117,6 @@ public class EnemyController : KinematicBody2D
 
             acceleration = -acceleration;
             velocity = (this.Position - target.Position) * maxMoveSpeed;
-            GD.Print("new vel: " + velocity);
 
         }
     }

@@ -19,7 +19,6 @@ public class PlayerController : KinematicBody2D
 
     private Timer HitTimer;
 
-    //TODO: Figure out how to set up the weapon
     private Weapon weapon;
 
     private CollisionShape2D coll;
@@ -59,7 +58,6 @@ public class PlayerController : KinematicBody2D
         timer.Start();
         experience.OnLevelUpEvent += combatStats.OnLevelUp;
 
-        GD.Print("Player Controller Ready");
         OnPlayerReady.Invoke();
     }
 
@@ -73,7 +71,6 @@ public class PlayerController : KinematicBody2D
         return weapon; 
     }
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
     public override void _Process(float delta)
     {
 
@@ -89,7 +86,6 @@ public class PlayerController : KinematicBody2D
         
         }
 
-        //TODO: Move to physics process
         HandleMoveDirInput();
 
         moveDir = moveDir.Normalized() * delta;

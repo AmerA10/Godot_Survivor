@@ -4,11 +4,7 @@ using System.Collections.Generic;
 
 public class Weapon : Node
 {
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
 
-    // Called when the node enters the scene tree for the first time.
     [Export]private int weaponDamage;
     private Projectile projectile;
 
@@ -69,7 +65,6 @@ public class Weapon : Node
             missiles.Add(projectile);
 
             this.AddChild(projectile);
-            GD.Print("Creating Missile");
         }
 
         secondaryFireMeter = 0;
