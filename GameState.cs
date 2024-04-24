@@ -21,13 +21,24 @@ public class GameState : Node2D
         player = GetNodeOrNull<PlayerController>("./Player");
         player.GetHealthComponent().OnDeathEvenet += HandlePlayerDeath;
         playerCombatStats = player.GetPlayerCombatStats();
+        enemySpawner = GetNodeOrNull<EnemySpawner>("./EnemySpawner");
+        gameTimer.OnTimerReached += OnTimerIntervalReached;
     }
         
     
     public void OnTimerIntervalReached()
     {
-        playerCombatStats.AddAttackSpeed(0.1f);
+        if (IsInstanceValid(player))
+        {
+        playerCombatStats.AddAttackSpeed(0.25f);
         playerCombatStats.AddMoveSpeed(10.0f);
+
+        }
+        if(IsInstanceValid(enemySpawner))
+        {
+        enemySpawner.UpLevel();
+
+        }
     }
 
     public void HandlePlayerDeath()

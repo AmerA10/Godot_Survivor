@@ -12,7 +12,8 @@ public class GameTimer : Node
 
     private float timer = 0.0f;
 
-    private int timerInterval = 30;
+    [Export]
+    private int timerInterval = 10;
 
     public delegate void OnTimerIntervalReachedEvent();
     public OnTimerIntervalReachedEvent OnTimerReached;
@@ -26,9 +27,10 @@ public class GameTimer : Node
     {
         timer += delta;
 
-        if (((int)timer % timerInterval) == 0 ) 
+        if (((int)timer % timerInterval) == 0 && timer > timerInterval ) 
         {
-            //Interval Reached
+            GD.Print("Timer interval reaced: " + (int)timer);
+            timerInterval += (int)timer;
             OnTimerReached?.Invoke();
         
         }

@@ -67,7 +67,7 @@ autoplay = "Walk"
 anims/Walk = SubResource( 2 )
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 1.5
 
 [node name="HitTimer" type="Timer" parent="."]
 wait_time = 2.0

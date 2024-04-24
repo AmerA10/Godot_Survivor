@@ -19,6 +19,8 @@ public class EnemyController : KinematicBody2D
 
     private Node2D target;
 
+    private Sprite sprite;
+
     [Export] private Vector2 velocity;
     [Export] private Vector2 acceleration;
     [Export] private Vector2 repulsiveForce;
@@ -37,7 +39,7 @@ public class EnemyController : KinematicBody2D
         healthComp = GetNode<HealthComponent>("HealthComponent");
         moveComp = GetNode<MovementComponent>("MovementComponent");
         healthComp.OnDeathEvenet += OnDeathHandle;
-
+        sprite = GetNodeOrNull<Sprite>("Sprite");
     }
 
     public void SetUpEnemy(EnemySpawner spawner ,Node2D target)
@@ -76,7 +78,7 @@ public class EnemyController : KinematicBody2D
             
             velocity += acceleration;
             velocity = velocity.LimitLength(maxMoveSpeed);
-
+           
             KinematicCollision2D kinColl = this.MoveAndCollide(velocity * delta);
 
 
