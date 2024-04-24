@@ -78,7 +78,7 @@ public class EnemyController : KinematicBody2D
             
             velocity += acceleration;
             velocity = velocity.LimitLength(maxMoveSpeed);
-           
+            
             KinematicCollision2D kinColl = this.MoveAndCollide(velocity * delta);
 
 
@@ -109,7 +109,20 @@ public class EnemyController : KinematicBody2D
             repulsiveForce *= maxMoveSpeed * 0.75f;
 
         }
-        
+        if (IsInstanceValid(sprite))
+        {
+            if (velocity.x > 0)
+            {
+
+                sprite.FlipH = (false);
+
+            }
+            else
+            {
+                sprite.FlipH = (true);
+            }
+        }
+
     }
 
     public void MoveBack()

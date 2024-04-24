@@ -2,16 +2,16 @@
 
 [ext_resource path="res://Scenes/LevelBG.tres" type="Texture" id=1]
 [ext_resource path="res://Scenes/ProjectileBoundaries.cs" type="Script" id=2]
-[ext_resource path="res://GameState.cs" type="Script" id=3]
+[ext_resource path="res://Core/GameState.cs" type="Script" id=3]
 [ext_resource path="res://Scenes/LevelTiles.tres" type="TileSet" id=4]
 [ext_resource path="res://Enemies/En_Tank.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Player.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Core/Player.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Enemies/EnemySpawner.tscn" type="PackedScene" id=7]
-[ext_resource path="res://GameUI.tscn" type="PackedScene" id=8]
+[ext_resource path="res://Core/GameUI.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Scenes/GameTimer.cs" type="Script" id=9]
 [ext_resource path="res://Enemies/Enemy_Truck.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Enemy_Cannon.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Enemy_Jet.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Enemies/Enemy_Cannon.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Enemies/Enemy_Jet.tscn" type="PackedScene" id=12]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 27.5, 424.615 )

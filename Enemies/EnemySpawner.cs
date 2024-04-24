@@ -60,6 +60,7 @@ public class EnemySpawner : Node2D
         GD.Print(spawnLoc1.Name + " : " + spawnLoc2.Name + " : " + spawnLoc3.Name);
 
         timer.Start();
+        GD.Randomize();
     }
 
     public void SpawnEnemy()
