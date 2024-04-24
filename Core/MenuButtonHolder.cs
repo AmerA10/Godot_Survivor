@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Remoting.Messaging;
 
 public class MenuButtonHolder : GridContainer
 {
@@ -17,10 +18,15 @@ public class MenuButtonHolder : GridContainer
 
     private int currentBtnIndex;
 
+
+    [Export]
+    private AnimationPlayer anim;
+
     public override void _Ready()
     {
 
         highlight = GetNodeOrNull<TextureRect>("../Highlight");
+        anim = GetNodeOrNull<AnimationPlayer>("../FaderAnimation");
 
         GD.Print(highlight.Name);
 
@@ -56,7 +62,7 @@ public class MenuButtonHolder : GridContainer
         }
     }
 
-    public void PressCurrentButton()
+    public async void PressCurrentButton()
     {
         if(IsInstanceValid(currentBtn))
         {
@@ -65,7 +71,9 @@ public class MenuButtonHolder : GridContainer
             switch (currentBtnIndex)
             {
                 case 0:
-                    GetTree().ChangeSceneTo(PlayScene);
+                    anim.Play("FadeIn");
+                    anim.Connect("animation_finished", this, "GoToPlay");
+                    
                     break;
                 case 1:
 
@@ -77,6 +85,11 @@ public class MenuButtonHolder : GridContainer
                     break;
             }
         }
+    }
+
+    public void GoToPlay(string animName)
+    {
+        GetTree().ChangeSceneTo(PlayScene);
     }
     
 

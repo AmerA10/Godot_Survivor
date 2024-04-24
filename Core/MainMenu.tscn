@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Assets/UI/8-bit-pusab.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/UI/kenney_ui-pack/PNG/blue_button00.png" type="Texture" id=2]
@@ -11,6 +11,37 @@
 [ext_resource path="res://Core/MenuButtonHolder.cs" type="Script" id=9]
 [ext_resource path="res://Core/MainMenu.cs" type="Script" id=10]
 [ext_resource path="res://Scenes/Level.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Assets/UI/ColorRectFader.tscn" type="PackedScene" id=12]
+
+[sub_resource type="Animation" id=4]
+resource_name = "FadeIn"
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainMenu/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 0 ), Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=5]
+resource_name = "FadeOut"
+tracks/0/type = "value"
+tracks/0/path = NodePath("MainMenu/ColorRect:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 0, 0, 0, 0 ) ]
+}
 
 [sub_resource type="DynamicFont" id=2]
 size = 21
@@ -30,6 +61,11 @@ script = ExtResource( 10 )
 [node name="MainMenu" type="Control" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+
+[node name="FaderAnimation" type="AnimationPlayer" parent="MainMenu"]
+root_node = NodePath("../..")
+anims/FadeIn = SubResource( 4 )
+anims/FadeOut = SubResource( 5 )
 
 [node name="Highlight" parent="MainMenu" instance=ExtResource( 8 )]
 margin_left = 452.0
@@ -130,6 +166,6 @@ align = 1
 valign = 1
 uppercase = true
 
-[node name="TextureRect" type="TextureRect" parent="."]
-margin_right = 40.0
-margin_bottom = 40.0
+[node name="ColorRect" parent="MainMenu" instance=ExtResource( 12 )]
+margin_bottom = 427.0
+color = Color( 0, 0, 0, 0 )
