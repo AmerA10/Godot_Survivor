@@ -80,11 +80,6 @@ public class PlayerController : KinematicBody2D
     {
         
 
-        if (Input.IsActionJustPressed("game_action1")) 
-        {
-            experience.TestLevelUp();
-        }
-
         if (Input.IsActionJustPressed("game_action2")) 
         {
             weapon.FireSecondary(this.Position, spawner.GetEnemies());
