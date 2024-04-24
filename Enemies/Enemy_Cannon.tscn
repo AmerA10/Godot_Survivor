@@ -8,8 +8,6 @@ extents = Vector2( 6.5, 5.25 )
 
 [node name="Enemy" instance=ExtResource( 1 )]
 scale = Vector2( 2, 2 )
-collision_layer = 2
-collision_mask = 5
 Health = 6
 maxMoveSpeed = 30.0
 maxForce = 1.0

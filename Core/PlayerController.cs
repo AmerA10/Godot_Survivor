@@ -156,6 +156,9 @@ public class PlayerController : KinematicBody2D
         
         if (enemy != null)
         {
+
+            coll.SetDeferred("Disable", true);
+
             if(canPushBack)
             {
                 spawner.MoveEnemiesBack();
@@ -163,7 +166,6 @@ public class PlayerController : KinematicBody2D
             }
             //Try to move the player or enemy away
 
-            coll.Disabled = true;
 
             HitTimer.Start();
 
@@ -172,7 +174,7 @@ public class PlayerController : KinematicBody2D
     }
     public void OnHitTimerTimeOut()
     {
-        coll.Disabled = false;
+        coll.SetDeferred("Disable", false);
         canPushBack = true;
     }
 

@@ -10,6 +10,9 @@ extents = Vector2( 11.5, 14.5 )
 [node name="HomingProjectile" instance=ExtResource( 1 )]
 position = Vector2( 1, 0 )
 
+[node name="Area2D" parent="." index="0"]
+collision_layer = 8
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
 position = Vector2( 0.499999, 0.500001 )
 shape = SubResource( 1 )
