@@ -169,3 +169,7 @@ uppercase = true
 [node name="ColorRect" parent="MainMenu" instance=ExtResource( 12 )]
 margin_bottom = 427.0
 color = Color( 0, 0, 0, 0 )
+
+[node name="Panel" type="Panel" parent="MainMenu"]
+margin_right = 40.0
+margin_bottom = 40.0
