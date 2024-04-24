@@ -26,7 +26,7 @@ public class PlayerController : KinematicBody2D
     private Vector2 moveDir;
     private Vector2 facingDir;
 
-    private int moveSpeed;
+    private float moveSpeed;
 
     private bool canPushBack = true;
 
@@ -56,7 +56,7 @@ public class PlayerController : KinematicBody2D
 
         timer.WaitTime = (combatStats.GetAttackSpeed());
         timer.Start();
-        experience.OnLevelUpEvent += combatStats.OnLevelUp;
+        
 
         OnPlayerReady.Invoke();
     }
@@ -71,9 +71,14 @@ public class PlayerController : KinematicBody2D
         return weapon; 
     }
 
+    public PlayerCombatStats GetPlayerCombatStats()
+    {
+        return combatStats;
+    }
+
     public override void _Process(float delta)
     {
-
+        
 
         if (Input.IsActionJustPressed("game_action1")) 
         {
@@ -175,6 +180,12 @@ public class PlayerController : KinematicBody2D
     {
        Vector2 targetVec = facingDir.Normalized();
        weapon.FireWeapon(this.Position, targetVec);
+    }
+
+    public void UpdateStats()
+    {
+        this.moveSpeed = combatStats.GetMoveSpeed();
+        this.timer.WaitTime = combatStats.GetAttackSpeed();
     }
 }
 

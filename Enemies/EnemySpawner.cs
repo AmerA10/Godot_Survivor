@@ -12,7 +12,15 @@ public class EnemySpawner : Node2D
     // Called when the node enters the scene tree for the first time.
 
     [Export]
-    public PackedScene EnemyScene { get; set; }
+    public PackedScene EnemyScene1 { get; set; }
+    [Export]
+    public PackedScene EnemyScene2 { get; set; }
+    [Export]
+    public PackedScene EnemyScene3 { get; set; }
+    [Export]
+    public PackedScene EnemyScene4 { get; set; }
+
+    private int level = 1;
 
     [Export]
     public Node2D spawnLoc1 { get; set; }
@@ -25,7 +33,10 @@ public class EnemySpawner : Node2D
     [Export]
     private int spawnTime = 5;
 
-    [Export] private int maxEnemies = 7;
+    [Export] private int maxEnemies = 4;
+    [Export] private int maxSpawnableEnemies = 10;
+
+    private int[,] SpawnPercentage = { { 100, 0, 0, 0 }, { 50, 40, 0, 0 }, { 30, 30, 30, 10 }, { 10, 20, 40, 30 } };
 
 
     private PlayerController playerTarget;
@@ -56,7 +67,7 @@ public class EnemySpawner : Node2D
         //Spawn position
         Vector2 spawnPos;
 
-        if(GD.Randf() <= 0.5f)
+        if (GD.Randf() <= 0.5f)
         {
             spawnPos = new Vector2((float)GD.RandRange(spawnLoc1.GlobalPosition.x, spawnLoc2.GlobalPosition.x), spawnLoc1.GlobalPosition.y);
         }
@@ -71,10 +82,29 @@ public class EnemySpawner : Node2D
         otherSideSpawn = GD.Randf() <= 0.5f ? 1 : -1;
         spawnPos.y *= otherSideSpawn;
 
-      
 
-        EnemyController enemy = EnemyScene.Instance<EnemyController>();
-        
+        int chance = (int)GD.Randi() % 101;
+
+        EnemyController enemy;
+
+        if (chance >= SpawnPercentage[level,0] && chance < SpawnPercentage[level,1])
+        {
+            enemy = EnemyScene1.Instance<EnemyController>();
+
+        }
+        else if(chance >= SpawnPercentage[level, 1] && chance < SpawnPercentage[level, 2])
+        {
+            enemy = EnemyScene2.Instance<EnemyController>();
+        }
+        else if(chance >= SpawnPercentage[level, 2] && chance < SpawnPercentage[level, 3])
+        {
+            enemy = EnemyScene3.Instance<EnemyController>();
+        }
+        else
+        {
+            enemy = EnemyScene4.Instance<EnemyController>();
+        }
+
         enemy.SetUpEnemy(this, playerTarget);
 
 
@@ -131,4 +161,18 @@ public class EnemySpawner : Node2D
         }
     }
 
+    public void UpLevel()
+    {
+        this.level += 1;
+        this.maxEnemies++;
+
+        if(level >= 4)
+        {
+            level = 4;
+        }
+        if(maxEnemies > maxSpawnableEnemies)
+        {
+            this.maxEnemies= maxSpawnableEnemies;
+        }
+    }
 }

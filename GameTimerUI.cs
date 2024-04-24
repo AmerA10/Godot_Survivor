@@ -1,7 +1,7 @@
 using Godot;
 using System;
 
-public class GameTimerUI : RichTextLabel
+public class GameTimerUI : Label
 {
     // Declare member variables here. Examples:
     // private int a = 2;
@@ -19,7 +19,9 @@ public class GameTimerUI : RichTextLabel
     public void UpdateTimerUI(float timer)
     {
         this.timer = timer;
-        this.Text = "Timer: " + this.timer;
+        string[] seperator= timer.ToString().Split('.');
+        
+        this.Text = timer.ToString("0.##");
     }
 
 //  // Called every frame. 'delta' is the elapsed time since the previous frame.

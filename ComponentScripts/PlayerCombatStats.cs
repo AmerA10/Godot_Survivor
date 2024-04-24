@@ -14,11 +14,17 @@ public class PlayerCombatStats : Node
     public delegate void OnStatsUpdated();
 
     [Export]
-    private int attackSpeed;
+    private float attackSpeed;
     [Export]
-    private int moveSpeed;
+    private float moveSpeed;
     [Export]
     private int maxHealth;
+
+    [Export]
+    private float maxAttackSpeed;
+
+    [Export]
+    private float maxMoveSpeed;
     public override void _Ready()
     {
         
@@ -29,19 +35,28 @@ public class PlayerCombatStats : Node
         GD.Print("Combat stats should change now");
     }
 
-    public int GetMoveSpeed() { return moveSpeed; }
-    public int GetAttackSpeed() { return attackSpeed; }
+    public float GetMoveSpeed() { return moveSpeed; }
+    public float GetAttackSpeed() { return attackSpeed; }
 
     public int GetMaxHealth() { return maxHealth; }
 
-    public void UpdateAttackSpeed(int newAttackSpeed)
+    public void AddAttackSpeed(float newAttackSpeed)
     {
-        this.attackSpeed= newAttackSpeed;
+        this.attackSpeed -= newAttackSpeed;
+        if(this.attackSpeed < maxAttackSpeed)
+        {
+            this.attackSpeed = maxAttackSpeed;
+        }
         EmitSignal(nameof(OnStatsUpdated));
     }
-    public void UpdateMoveSpeed(int newMoveSpeed)
+    public void AddMoveSpeed(float newMoveSpeed)
     {
-        this.moveSpeed= newMoveSpeed;
+        
+        this.moveSpeed += newMoveSpeed;
+        if(this.moveSpeed > maxMoveSpeed)
+        {
+            this.moveSpeed = maxMoveSpeed;
+        }
         EmitSignal(nameof(OnStatsUpdated));
 
     }

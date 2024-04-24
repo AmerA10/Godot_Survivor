@@ -5,6 +5,8 @@ public class GameState : Node2D
 {
 
     private PlayerController player;
+    private PlayerCombatStats playerCombatStats;
+    private EnemySpawner enemySpawner;
 
     private enum gameState { PLAYING, DONE };
 
@@ -18,13 +20,14 @@ public class GameState : Node2D
         this.AddChild(gameTimer);
         player = GetNodeOrNull<PlayerController>("./Player");
         player.GetHealthComponent().OnDeathEvenet += HandlePlayerDeath;
-        GD.Print("Got player: " + player);
+        playerCombatStats = player.GetPlayerCombatStats();
     }
         
     
     public void OnTimerIntervalReached()
     {
-
+        playerCombatStats.AddAttackSpeed(0.1f);
+        playerCombatStats.AddMoveSpeed(10.0f);
     }
 
     public void HandlePlayerDeath()
