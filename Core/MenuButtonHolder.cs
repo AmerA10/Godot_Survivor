@@ -20,13 +20,13 @@ public class MenuButtonHolder : GridContainer
 
 
     [Export]
-    private AnimationPlayer anim;
+    private ColorRectFader fader;
 
     public override void _Ready()
     {
 
         highlight = GetNodeOrNull<TextureRect>("../Highlight");
-        anim = GetNodeOrNull<AnimationPlayer>("../FaderAnimation");
+        fader = GetNodeOrNull<AnimationPlayer>("../FaderAnimation");
 
         GD.Print(highlight.Name);
 
@@ -71,8 +71,8 @@ public class MenuButtonHolder : GridContainer
             switch (currentBtnIndex)
             {
                 case 0:
-                    anim.Play("FadeIn");
-                    anim.Connect("animation_finished", this, "GoToPlay");
+                    fader.GetAnimPlayer().Connect("animation_finished", this, "GoToPlay");
+                    fader.FadeIn();
                     
                     break;
                 case 1:
