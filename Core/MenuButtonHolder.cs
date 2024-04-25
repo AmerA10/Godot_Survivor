@@ -18,17 +18,15 @@ public class MenuButtonHolder : GridContainer
 
     private int currentBtnIndex;
 
-
-    [Export]
     private ColorRectFader fader;
 
     public override void _Ready()
     {
 
         highlight = GetNodeOrNull<TextureRect>("../Highlight");
-        fader = GetNodeOrNull<AnimationPlayer>("../FaderAnimation");
+        fader = GetNodeOrNull<ColorRectFader>("/root/ColorRectFader");
 
-        GD.Print(highlight.Name);
+        fader.FadeOut();
 
         foreach(TextureButton texBtn in this.GetChildren())
         {
@@ -55,14 +53,13 @@ public class MenuButtonHolder : GridContainer
 
     public void ClearPresses()
     {
-        GD.Print("ClearPresses");
         foreach(TextureButton btn in buttons)
         {
             btn.Pressed = false;
         }
     }
 
-    public async void PressCurrentButton()
+    public void PressCurrentButton()
     {
         if(IsInstanceValid(currentBtn))
         {
@@ -71,11 +68,19 @@ public class MenuButtonHolder : GridContainer
             switch (currentBtnIndex)
             {
                 case 0:
-                    fader.GetAnimPlayer().Connect("animation_finished", this, "GoToPlay");
-                    fader.FadeIn();
+                    if(IsInstanceValid(fader))
+                    {
+                        if (!fader.GetAnimPlayer().IsConnected("animation_finished", this, "OnAnimationEnd"))
+                        {
+                            fader.GetAnimPlayer().Connect("animation_finished", this, "GoToPlay");
+
+                        }
+                        fader.FadeIn();
+                    }
                     
                     break;
                 case 1:
+                    //Show Tutorial Message
 
                     break;
                 case 2:
@@ -89,6 +94,11 @@ public class MenuButtonHolder : GridContainer
 
     public void GoToPlay(string animName)
     {
+        if (fader.GetAnimPlayer().IsConnected("animation_finished", this, "OnAnimationEnd"))
+        {
+            fader.GetAnimPlayer().Disconnect("animation_finished", this, "GoToPlay");
+
+        }
         GetTree().ChangeSceneTo(PlayScene);
     }
     

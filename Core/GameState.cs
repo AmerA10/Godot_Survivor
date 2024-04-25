@@ -14,6 +14,11 @@ public class GameState : Node2D
 
     private GameTimer gameTimer;
 
+    private ColorRectFader fader;
+
+    [Export]
+    private PackedScene MenuScene;
+
     public override void _Ready()
     {
         gameTimer = new GameTimer();
@@ -23,6 +28,13 @@ public class GameState : Node2D
         playerCombatStats = player.GetPlayerCombatStats();
         enemySpawner = GetNodeOrNull<EnemySpawner>("./EnemySpawner");
         gameTimer.OnTimerReached += OnTimerIntervalReached;
+        fader = GetNodeOrNull<ColorRectFader>("/root/ColorRectFader");
+
+        if(IsInstanceValid(fader))
+        {
+            fader.FadeOut();
+
+        }
     }
         
     
@@ -36,14 +48,32 @@ public class GameState : Node2D
         }
         if(IsInstanceValid(enemySpawner))
         {
-        enemySpawner.UpLevel();
+            enemySpawner.UpLevel();
 
         }
     }
 
     public void HandlePlayerDeath()
     {
+        GD.Print("Handling player death");
         currentState = gameState.DONE;
+        if (!fader.GetAnimPlayer().IsConnected("animation_finished", this, "GoToMenu"))
+        {
+            fader.GetAnimPlayer().Connect("animation_finished", this, "GoToMenu");
+
+        }
+        fader.FadeIn();
+        player.GetHealthComponent().OnDeathEvenet -= HandlePlayerDeath;
+    }
+    public void GoToMenu(string name)
+    {
+        GD.Print("Changing scenes");
+        if (fader.GetAnimPlayer().IsConnected("animation_finished", this, "GoToMenu"))
+        {
+            fader.GetAnimPlayer().Disconnect("animation_finished", this, "GoToMenu");
+
+        }
+        GetTree().ChangeScene("res://Scenes/Main.tscn");
     }
 
 }

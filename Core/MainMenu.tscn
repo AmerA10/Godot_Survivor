@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Assets/UI/8-bit-pusab.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/UI/kenney_ui-pack/PNG/blue_button00.png" type="Texture" id=2]
@@ -11,7 +11,6 @@
 [ext_resource path="res://Core/MenuButtonHolder.cs" type="Script" id=9]
 [ext_resource path="res://Core/MainMenu.cs" type="Script" id=10]
 [ext_resource path="res://Scenes/Level.tscn" type="PackedScene" id=11]
-[ext_resource path="res://Assets/UI/ColorRectFader.tscn" type="PackedScene" id=12]
 
 [sub_resource type="DynamicFont" id=2]
 size = 21
@@ -130,10 +129,3 @@ text = "Exit"
 align = 1
 valign = 1
 uppercase = true
-
-[node name="ColorRect" parent="MainMenu" instance=ExtResource( 12 )]
-margin_bottom = 427.0
-color = Color( 0, 0, 0, 0 )
-__meta__ = {
-"_edit_use_anchors_": true
-}

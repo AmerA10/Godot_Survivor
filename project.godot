@@ -14,6 +14,10 @@ config/name="Suvivor"
 run/main_scene="res://Scenes/Main.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+ColorRectFader="*res://Assets/UI/ColorRectFader.tscn"
+
 [display]
 
 window/size/width=800

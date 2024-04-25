@@ -164,7 +164,9 @@ public class PlayerController : KinematicBody2D
 
             HitTimer.Start();
 
+
             health.TakeDamage(1);
+
         }
     }
     public void OnHitTimerTimeOut()

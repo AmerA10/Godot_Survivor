@@ -33,6 +33,10 @@ public class HealthComponent : Node2D
 
     public void TakeDamage(int damage)
     {
+        if(currentHealth < 1)
+        {
+            return;
+        }
         currentHealth -= damage;
         EmitSignal(nameof(OnHealthUpdatedEventHandler), currentHealth);
         OnHealthUpdated?.Invoke(currentHealth);
@@ -48,6 +52,11 @@ public class HealthComponent : Node2D
     public int GetMaxHealth()
     {
         return maxHealth; 
+    }
+
+    public int GetCurrentHealth()
+    {
+        return currentHealth;
     }
 
 
