@@ -9,6 +9,9 @@ public class MenuButtonHolder : GridContainer
     private TextureRect highlight;
 
     [Export]
+    private AspectRatioContainer tutorial;
+
+    [Export]
     private List<TextureButton> buttons;
 
     [Export]
@@ -20,12 +23,15 @@ public class MenuButtonHolder : GridContainer
 
     private ColorRectFader fader;
 
+    private bool IsDisplayingTutorial;
     public override void _Ready()
     {
 
         highlight = GetNodeOrNull<TextureRect>("../Highlight");
         fader = GetNodeOrNull<ColorRectFader>("/root/ColorRectFader");
-
+        tutorial = GetNodeOrNull<AspectRatioContainer>("../TutorialContainer");
+        tutorial.Visible = false;
+        IsDisplayingTutorial = false;
         fader.FadeOut();
 
         foreach(TextureButton texBtn in this.GetChildren())
@@ -63,6 +69,14 @@ public class MenuButtonHolder : GridContainer
     {
         if(IsInstanceValid(currentBtn))
         {
+
+            if (IsDisplayingTutorial)
+            {
+                tutorial.Visible = false;
+                IsDisplayingTutorial = false;
+                return;
+            }
+
             currentBtn.Pressed= true;
             currentBtn.GrabFocus();
             switch (currentBtnIndex)
@@ -81,7 +95,8 @@ public class MenuButtonHolder : GridContainer
                     break;
                 case 1:
                     //Show Tutorial Message
-
+                    tutorial.Visible = true;
+                    IsDisplayingTutorial = true;
                     break;
                 case 2:
                     GetTree().Quit();
