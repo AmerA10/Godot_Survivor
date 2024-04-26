@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://Assets/UI/8-bit-pusab.ttf" type="DynamicFontData" id=1]
 [ext_resource path="res://Assets/UI/kenney_ui-pack/PNG/blue_button00.png" type="Texture" id=2]
@@ -12,6 +12,10 @@
 [ext_resource path="res://Core/MainMenu.cs" type="Script" id=10]
 [ext_resource path="res://Scenes/Level.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Assets/UI/kenney_ui-pack-space-expansion/PNG/metalPanel_blue.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Sound/confirmation_002.ogg" type="AudioStream" id=13]
+[ext_resource path="res://Assets/Sound/GameStartAudio.mp3" type="AudioStream" id=14]
+[ext_resource path="res://Assets/Sound/confirmation_001.ogg" type="AudioStream" id=15]
+[ext_resource path="res://Assets/Sound/tone1.ogg" type="AudioStream" id=16]
 
 [sub_resource type="DynamicFont" id=2]
 size = 21
@@ -69,6 +73,9 @@ script = ExtResource( 9 )
 highlight = ExtResource( 8 )
 buttons = [  ]
 PlayScene = ExtResource( 11 )
+btnClick = ExtResource( 15 )
+btnPlay = ExtResource( 14 )
+btnMove = ExtResource( 16 )
 
 [node name="PlayBtn" type="TextureButton" parent="MainMenu/MenuButtonHolder"]
 margin_right = 150.0
@@ -140,6 +147,9 @@ text = "Exit"
 align = 1
 valign = 1
 uppercase = true
+
+[node name="ButtonAudio" type="AudioStreamPlayer2D" parent="MainMenu"]
+stream = ExtResource( 13 )
 
 [node name="TutorialContainer" type="AspectRatioContainer" parent="MainMenu"]
 visible = false

@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 ColorRectFader="*res://Assets/UI/ColorRectFader.tscn"
+MusicPlayer="*res://MusicPlayer.tscn"
 
 [display]
 

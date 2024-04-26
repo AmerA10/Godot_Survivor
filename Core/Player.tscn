@@ -76,7 +76,7 @@ wait_time = 2.0
 secondaryFireMeterMax = 8
 secondaryFireDamage = 4
 
-[node name="AudioPlayer" type="AudioStreamPlayer2D" parent="."]
+[node name="OnHitAudio" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="body_entered" from="HitBoxComponent" to="." method="OnBodyEnteredPlayer"]
 [connection signal="OnStatsUpdated" from="PlayerCombatStats" to="." method="UpdateStats"]

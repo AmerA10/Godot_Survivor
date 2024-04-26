@@ -24,9 +24,13 @@ public class Weapon : Node
     public delegate void OnSecondaryWeaponAmountChangeEvent(int newAmount);
     public OnSecondaryWeaponAmountChangeEvent OnSecondaryAmountUpdate;
 
+    private AudioStreamPlayer2D primaryAudio;
+    private AudioStreamPlayer2D secondaryAudio;
+
     public override void _Ready()
     {
-
+        primaryAudio= GetNode<AudioStreamPlayer2D>("PrimaryWeaponAudio");
+        secondaryAudio = GetNode<AudioStreamPlayer2D>("SecondaryWeaponAudio");
     }
 
     public void FireWeapon(Vector2 pos, Vector2 dir)
@@ -41,6 +45,7 @@ public class Weapon : Node
         projectile.Position = pos;
         projectile.OnProjecatileHit += OnProjectileHit;
         this.AddChild(projectile);
+        primaryAudio.Play();
     }
 
 
@@ -65,6 +70,7 @@ public class Weapon : Node
             missiles.Add(projectile);
 
             this.AddChild(projectile);
+            secondaryAudio.Play();
         }
 
         secondaryFireMeter = 0;

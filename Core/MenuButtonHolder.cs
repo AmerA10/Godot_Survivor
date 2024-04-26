@@ -24,12 +24,22 @@ public class MenuButtonHolder : GridContainer
     private ColorRectFader fader;
 
     private bool IsDisplayingTutorial;
+
+    [Export]
+    private AudioStream btnClick;
+    [Export]
+    private AudioStream btnPlay;
+    [Export]
+    private AudioStream btnMove;
+    private AudioStreamPlayer2D audioPlayer;
+
     public override void _Ready()
     {
 
         highlight = GetNodeOrNull<TextureRect>("../Highlight");
         fader = GetNodeOrNull<ColorRectFader>("/root/ColorRectFader");
         tutorial = GetNodeOrNull<AspectRatioContainer>("../TutorialContainer");
+        audioPlayer = GetNodeOrNull<AudioStreamPlayer2D>("../ButtonAudio");
         tutorial.Visible = false;
         IsDisplayingTutorial = false;
         fader.FadeOut();
@@ -47,6 +57,10 @@ public class MenuButtonHolder : GridContainer
 
     public void ChangeSelectedButton(int delta)
     {
+        audioPlayer.Stop();
+        audioPlayer.Stream = btnMove;
+        audioPlayer.Play();
+
         ClearPresses();
 
         currentBtnIndex = Mathf.Min(Mathf.Max(currentBtnIndex + delta,0), buttons.Count - 1);
@@ -54,7 +68,7 @@ public class MenuButtonHolder : GridContainer
         currentBtn.GrabFocus();
 
         highlight.RectPosition = currentBtn.GetGlobalRect().Position + ((currentBtn.RectSize / 2) - (highlight.RectSize / 2));
-        
+
     }
 
     public void ClearPresses()
@@ -82,7 +96,10 @@ public class MenuButtonHolder : GridContainer
             switch (currentBtnIndex)
             {
                 case 0:
-                    if(IsInstanceValid(fader))
+                    audioPlayer.Stop();
+                    audioPlayer.Stream = btnPlay;
+                    audioPlayer.Play();
+                    if (IsInstanceValid(fader))
                     {
                         if (!fader.GetAnimPlayer().IsConnected("animation_finished", this, "OnAnimationEnd"))
                         {
@@ -95,6 +112,9 @@ public class MenuButtonHolder : GridContainer
                     break;
                 case 1:
                     //Show Tutorial Message
+                    audioPlayer.Stop();
+                    audioPlayer.Stream = btnClick;
+                    audioPlayer.Play();
                     tutorial.Visible = true;
                     IsDisplayingTutorial = true;
                     break;
