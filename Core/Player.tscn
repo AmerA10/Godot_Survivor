@@ -1,7 +1,6 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=10 format=2]
 
-[ext_resource path="res://Core/PlayerController.cs" type="Script" id=1]
-[ext_resource path="res://Components/Experience.tscn" type="PackedScene" id=2]
+[ext_resource path="res://GS_Scripts/gd_PlayerController.gd" type="Script" id=1]
 [ext_resource path="res://Components/HealthComponent.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Weapons/Weapon.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Components/HitBoxComponent.tscn" type="PackedScene" id=5]
@@ -59,8 +58,6 @@ maxMoveSpeed = 300.0
 scale = Vector2( 2.5, 2.5 )
 texture = ExtResource( 7 )
 
-[node name="Experience" parent="." instance=ExtResource( 2 )]
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite")
 autoplay = "Walk"
@@ -73,11 +70,10 @@ wait_time = 1.5
 wait_time = 2.0
 
 [node name="Weapon" parent="." instance=ExtResource( 4 )]
-secondaryFireMeterMax = 8
+secondaryFireMeterMax = 4
 secondaryFireDamage = 4
 
 [node name="OnHitAudio" type="AudioStreamPlayer2D" parent="."]
 
 [connection signal="body_entered" from="HitBoxComponent" to="." method="OnBodyEnteredPlayer"]
-[connection signal="OnStatsUpdated" from="PlayerCombatStats" to="." method="UpdateStats"]
 [connection signal="timeout" from="HitTimer" to="." method="OnHitTimerTimeOut"]

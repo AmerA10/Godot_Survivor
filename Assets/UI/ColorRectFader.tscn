@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://Assets/UI/ColorRectFader.cs" type="Script" id=1]
+[ext_resource path="res://GS_Scripts/gd_ColorRectFader.gd" type="Script" id=1]
 
 [sub_resource type="Animation" id=4]
 resource_name = "FadeIn"
@@ -42,7 +42,7 @@ margin_left = -1019.0
 margin_top = -777.0
 margin_right = 1181.0
 margin_bottom = 758.0
-color = Color( 0, 0, 0, 1 )
+color = Color( 0, 0, 0, 0 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Fader")

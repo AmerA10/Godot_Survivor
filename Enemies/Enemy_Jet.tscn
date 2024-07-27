@@ -11,6 +11,7 @@ scale = Vector2( 2, 2 )
 Health = 2
 maxMoveSpeed = 60.0
 maxForce = 0.9
+seperationDistance = 20
 
 [node name="Area2DCollisionShape2D" type="CollisionShape2D" parent="." index="2"]
 position = Vector2( 0, 0.25 )

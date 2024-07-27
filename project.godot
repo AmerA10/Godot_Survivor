@@ -19,6 +19,10 @@ config/icon="res://icon.png"
 ColorRectFader="*res://Assets/UI/ColorRectFader.tscn"
 MusicPlayer="*res://MusicPlayer.tscn"
 
+[debug]
+
+gdscript/completion/autocomplete_setters_and_getters=true
+
 [display]
 
 window/size/width=800

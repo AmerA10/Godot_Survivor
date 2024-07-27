@@ -8,8 +8,10 @@ extents = Vector2( 6.5, 5.25 )
 
 [node name="Enemy" instance=ExtResource( 2 )]
 scale = Vector2( 2, 2 )
-Health = 3
-maxForce = 0.25
+Health = 2
+maxMoveSpeed = 50.0
+maxForce = 1.0
+seperationDistance = 10
 
 [node name="Area2DCollisionShape2D" type="CollisionShape2D" parent="." index="0"]
 position = Vector2( 0, 0.25 )
